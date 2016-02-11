@@ -1,9 +1,11 @@
+@import "Source/Model/color.js"
+
 var ColorInventory = {
 
   // Return the shared styles colors dictionary
   // Keys are the name of the shared styles
   // Values are the HEX value
-  colorsDictionary: function(sharedStyles) {
+  definedColors: function(sharedStyles) {
     var dictionary = {}
     log("--- Color Dictionary: ");
 
@@ -11,7 +13,7 @@ var ColorInventory = {
       var style = sharedStyles.objects().objectAtIndex(i);
       if (style.style().fill() != null) {
         log(style);
-        dictionary[style.style().fill().color().hexValue()] = style.style();
+        dictionary[style.style().fill().color().hexValue()] = new Color(style.name(), style.style().fill().color().hexValue(), style.style().fill().color())//style.style();
         log(style.style().fill().color().hexValue()  + " : " + style.name());
       }
     }

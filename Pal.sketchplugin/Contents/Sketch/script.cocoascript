@@ -2,17 +2,21 @@
 @import "Source/Inventory/sharedInventory.js"
 @import "Source/Vaccum/vacum.js"
 @import "Source/Export/export.js"
+@import "Source/Export/swiftColors.js"
 
 var onRun = function(context) {
   var doc = context.document;
   var sharedStyles = SharedInventory.sharedStyles(doc);
 
-  var colorDictionary = ColorInventory.colorsDictionary(sharedStyles);
-  Vaccum.run(doc, colorDictionary, colorDictionary, sharedStyles);
+  var definedColors = ColorInventory.definedColors(sharedStyles);
+  Vaccum.run(doc, definedColors, definedColors, sharedStyles);
 
   log("EXPORT")
   var url = Export.selectExportLocationURL();
   var path = Export.pathForURL(url, "didi.swift");
-  Export.writeDataInPath("blabla", path);
+
+  log("GENERATE OUTPUT")
+  var definedColorsOutput = SwiftColors.generateSwiftColors(definedColors)
+  Export.writeDataInPath(definedColorsOutput, path);
   log("-----------\n\n")
 };
