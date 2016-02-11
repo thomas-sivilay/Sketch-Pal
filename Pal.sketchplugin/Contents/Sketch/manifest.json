@@ -1,0 +1,23 @@
+{
+  "author" : "Thomas SIVILAY",
+  "commands" : [
+    {
+      "script" : "script.cocoascript",
+      "handler" : "onRun",
+      "shortcut" : "",
+      "name" : "Pal",
+      "identifier" : "pal"
+    }
+  ],
+  "menu" : {
+    "items" : [
+      "pal"
+    ],
+    "title" : "Pal"
+  },
+  "identifier" : "com.example.sketch.9d976a78-eca8-489e-9a75-d13d6e325eef",
+  "version" : "1.0",
+  "description" : "",
+  "authorEmail" : "",
+  "name" : "Pal"
+}
