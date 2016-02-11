@@ -26,21 +26,11 @@ var Vaccum = {
           if (undefinedColor != null) {
             undefinedColors.push(undefinedColor);
           }
-
         }
       }
     }
     log("Number of undefined colors: " + undefinedColors.length);
   },
-
-  // logUndefined: function(style, dictionary, path) {
-  //   if (style.fill() != null) {
-  //     var hexValue =  style.fill().color().hexValue();
-  //     if (dictionary[hexValue] == null) {
-  //       log(hexValue + " IS UNDEFINED IN " + path);
-  //     }
-  //   }
-  // },
 
   setSharedStyle: function(dictionary, layer, sharedStyles) {
     //Is color -> fillType?
