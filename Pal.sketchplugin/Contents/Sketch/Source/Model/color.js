@@ -1,7 +1,7 @@
-var Color = function (name, hexValue, nsColor) {
+var Color = function (name, hexValue, msColor) {
 
   this.name = name;
   this.hexValue = hexValue;
-  this.nsColor = nsColor;
+  this.msColor = msColor;
 
 };
