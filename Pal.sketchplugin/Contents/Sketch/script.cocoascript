@@ -9,14 +9,10 @@ var onRun = function(context) {
   var sharedStyles = SharedInventory.sharedStyles(doc);
 
   var definedColors = ColorInventory.definedColors(sharedStyles);
-  Vaccum.run(doc, definedColors, definedColors, sharedStyles);
+  //Vaccum.run(doc, definedColors, definedColors, sharedStyles);
 
-  log("EXPORT")
   var url = Export.selectExportLocationURL();
-  var path = Export.pathForURL(url, "didi.swift");
-
-  log("GENERATE OUTPUT")
+  var colorPath = Export.pathForURL(url, "UIColorExtension.swift");
   var definedColorsOutput = SwiftColors.generateSwiftColors(definedColors)
-  Export.writeDataInPath(definedColorsOutput, path);
-  log("-----------\n\n")
+  Export.writeDataInPath(definedColorsOutput, colorPath);
 };
