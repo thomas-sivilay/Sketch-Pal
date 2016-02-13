@@ -10,11 +10,11 @@ var SwiftUtils = {
   },
 
   methodSignature: function(name) {
-    return "func " + SwiftUtils.camelize(SwiftUtils.cleanSymbol(name)) + "() {";
+    return "static func " + SwiftUtils.camelize(SwiftUtils.cleanSymbol(name)) + "() {";
   },
 
   methodSignature: function(name, output) {
-    return "func " + SwiftUtils.camelize(SwiftUtils.cleanSymbol(name)) + "() -> " + output + " {";
+    return "static func " + SwiftUtils.camelize(SwiftUtils.cleanSymbol(name)) + "() -> " + output + " {";
   },
 
   uiColor: function(color) {
@@ -39,7 +39,12 @@ var SwiftUtils = {
   },
 
   varFont: function(name, size, tabIncr) {
-    return tabIncr + "let font = UIFont(name: \"" + name + "\", size: " + size + ")" + SwiftUtils.newLine();
+    var output = "";
+    output += tabIncr + "guard let font = UIFont(name: \"" + name + "\", size: " + size + ") else {" + SwiftUtils.newLine();
+    output += tabIncr + SwiftUtils.tab() + "fatalError(\"Can't load font\")" + SwiftUtils.newLine();
+    output += tabIncr + "}" + SwiftUtils.newLine();
+
+    return output;
   },
 
   varParagraph: function(paragraph, tabIncr) {
@@ -49,7 +54,7 @@ var SwiftUtils = {
     output += "let paragraph = NSMutableParagraphStyle()";
     output += SwiftUtils.newLine();
     output += tabIncr;
-    output += "pragraph.minimumLineHeight = " + paragraph.minimumLineHeight();
+    output += "paragraph.minimumLineHeight = " + paragraph.minimumLineHeight();
     output += SwiftUtils.newLine();
     output += tabIncr;
     output += "paragraph.alignment = " + SwiftUtils.nsTextAlignment(paragraph.alignment());
@@ -95,7 +100,7 @@ var SwiftUtils = {
       output += ",";
       output += SwiftUtils.newLine();
       output += tabIncr + SwiftUtils.tab();
-      output += "NSPragraphStyleAttributeName: paragraph,"
+      output += "NSParagraphStyleAttributeName: paragraph,"
     }
 
     output += SwiftUtils.newLine();

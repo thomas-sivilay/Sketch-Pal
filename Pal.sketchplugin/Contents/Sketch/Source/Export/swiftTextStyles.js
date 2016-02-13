@@ -37,11 +37,12 @@ var SwiftTextStyles = {
     funcOutput += SwiftUtils.methodSignature(textStyle.name + "Attributes", "[String: AnyObject]?");
     funcOutput += SwiftUtils.newLine();
 
-    // let paragraph
     var tabIncr = SwiftUtils.tab() + SwiftUtils.tab();
-    funcOutput += SwiftUtils.varParagraph(textStyle.paragraph, tabIncr);
+
     // let font
     funcOutput += SwiftUtils.varFont(textStyle.font.fontName(), textStyle.font.pointSize(), tabIncr);
+    // let paragraph
+    funcOutput += SwiftUtils.varParagraph(textStyle.paragraph, tabIncr);
 
     // let color
     if (!definedColor) {
