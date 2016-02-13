@@ -3,7 +3,7 @@ var Export = {
   selectExportLocationURL: function(data) {
     var openPanel = [NSOpenPanel openPanel]
     [openPanel setTitle: "Choose a location…"]
-    [openPanel setMessage: "Select the export location…"];
+    [openPanel setMessage: "Select location…"];
     [openPanel setPrompt: "Export"];
 
     [openPanel setCanCreateDirectories: true]
