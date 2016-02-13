@@ -43,7 +43,7 @@ var SwiftColors = {
     // }
     funcOutput += SwiftUtils.tab();
     funcOutput += "}";
-    funcOutput += SwiftUtils.newLine();
+    funcOutput += SwiftUtils.newLine() + SwiftUtils.newLine();
 
     return funcOutput;
   }

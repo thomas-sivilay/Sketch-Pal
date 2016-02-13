@@ -22,7 +22,7 @@ var onRun = function(context) {
   var definedColorsOutput = SwiftColors.generateSwiftColors(definedColors);
   Export.writeDataInPath(definedColorsOutput, colorPath);
 
-  var textPath = Export.pathForURL(url, "DODO.swift");
-  var definedTextStylesOutput = SwiftTextStyles.generateSwiftTextStyles(definedTextStyles);
+  var textPath = Export.pathForURL(url, "NSDictionaryExtension.swift");
+  var definedTextStylesOutput = SwiftTextStyles.generateSwiftTextStyles(definedTextStyles, definedColors);
   Export.writeDataInPath(definedTextStylesOutput, textPath);
 };
