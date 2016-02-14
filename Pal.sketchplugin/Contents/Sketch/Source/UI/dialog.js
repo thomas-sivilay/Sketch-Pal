@@ -53,15 +53,30 @@ var Dialog = {
     var icon = Image.imageWithPath(plugin.urlForResourceNamed("ic_export.png").path());
 
     var undefinedColors = ColorAnalyzer.analyze(doc, definedColors, sharedStyles);
-    doc.showMessage("Find " + undefinedColors + " Colors un-defined as Shared Style");
+    var i = 0;
+    var count = Object.keys(undefinedColors).length;
 
     for (var key in undefinedColors) {
-      log(key);
+      i++;
       var undefinedColor = undefinedColors[key];
-      log(undefinedColor);
-      Dialog.undefinedColorAlert(undefinedColor);
-    }
+      var alert = Dialog.undefinedColorAlert(key, undefinedColor, i, count);
+      var response = alert.runModal();
+      log(response);
+      if (response == "1002") {
+        return;
+      } else if (response == "1000") {
+        // Set
+        var name = alert.viewAtIndex(2).stringValue();
 
+        if (name) {
+          var style = MSStyle.alloc().init();
+          var fill = style.fills().addNewStylePart();
+          fill.color = MSColor.colorWithSVGString("#" + key);
+          doc.documentData().layerStyles().addSharedStyleWithName_firstInstance(name, style);
+        }
+      }
+    }
+    doc.reloadInspector();
   },
 
   exportAlert: function(icon, definedColorsCount, definedTextStylesCount) {
@@ -91,30 +106,21 @@ var Dialog = {
     return alert;
   },
 
-  undefinedColorAlert: function(color) {
-    log(color);
+  undefinedColorAlert: function(key, color, index, count) {
     var alert = COSAlertWindow.new();
-    alert.setMessageText("Undefined Color");
-
+    alert.setMessageText("Undefined Color #" + key + " (" + index + "/" + count + ")");
     alert.addAccessoryView(Dialog.colorView(color));
-
-    alert.addTextLabelWithValue("Enter a color name: ");
+    alert.addTextLabelWithValue("Color name: ");
     alert.addTextFieldWithValue("");
 
     alert.addButtonWithTitle("Add Shared Style");
-    alert.addButtonWithTitle("Pass");
+    alert.addButtonWithTitle("I'll do it later..");
+    alert.addButtonWithTitle("Abort");
 
-    var response = alert.runModal()
-
-    if (response == "1000") {
-      log("ADD");
-    } else {
-      return;
-    }
+    return alert;
   },
 
   colorView: function(undefinedColor) {
-    log("-- " + undefinedColor);
     var view = NSView.alloc().initWithFrame(NSMakeRect(0, 0, 64, 64));
     var msColor = undefinedColor.msColor;
     var red = msColor.red();
@@ -122,10 +128,7 @@ var Dialog = {
     var green = msColor.green();
     var alpha = msColor.alpha();
 
-    log(red);
-    log(blue);
-    log(green);
-    var nsColor = [NSColor colorWithDeviceRed:red green:blue blue:green alpha:alpha];
+    var nsColor = [NSColor colorWithDeviceRed:red green:green blue:blue alpha:alpha];
 
     view.setWantsLayer(true);
     view.layer().setBackgroundColor(nsColor.CGColor());

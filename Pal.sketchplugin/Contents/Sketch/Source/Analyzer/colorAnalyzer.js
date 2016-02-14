@@ -23,14 +23,20 @@ var ColorAnalyzer = {
           // If style is Color
           var undefinedLayer = ColorAnalyzer.setSharedStyle(colorsDictionary, layer, sharedStyles);
           if (undefinedLayer != null) {
-            var color = new UndefinedColor(undefinedLayer.style().fill().color());
-            undefinedColors[undefinedLayer.style().fill().color().hexValue()] = color;
-            log(color);
+            var undefinedColor = undefinedColors[undefinedLayer.style().fill().color().hexValue()];
+            if (undefinedColor != null) {
+              var paths = undefinedColor.paths;
+              paths.push(path);
+              undefinedColors[undefinedLayer.style().fill().color().hexValue()].paths = paths;
+            } else {
+              var paths = [path];
+              var newUndefinedColor = new UndefinedColor(undefinedLayer.style().fill().color(), paths);
+              undefinedColors[undefinedLayer.style().fill().color().hexValue()] = newUndefinedColor;
+            }
           }
         }
       }
     }
-    log("Number of undefined colors: " + Object.keys(undefinedColors).length);
 
     return undefinedColors;
   },
@@ -40,7 +46,6 @@ var ColorAnalyzer = {
     if (layer.style().fill() != null) {
       var hexValue = layer.style().fill().color().hexValue();
       if (dictionary[hexValue] == null) {
-        log("Undefined color : " + hexValue + " in " + layer.name())
         return layer;
       }
       // if (layer.style().sharedObjectID() == null) {
