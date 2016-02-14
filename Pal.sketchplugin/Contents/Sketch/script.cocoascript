@@ -1,5 +1,9 @@
 @import "Source/UI/dialog.js"
 
-var onRun = function(context) {
-  Dialog.run(context);
+var runExport = function(context) {
+  Dialog.runExport(context);
+};
+
+var runAnalyze = function(context) {
+  Dialog.runAnalyze(context);
 };

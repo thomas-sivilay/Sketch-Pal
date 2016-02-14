@@ -1,4 +1,4 @@
-@import "Source/Export/swiftUtils.js"
+@import "Source/Export/Swift/swiftUtils.js"
 
 // Responsible of generating swift output for given defined colors
 var SwiftColors = {
@@ -29,6 +29,8 @@ var SwiftColors = {
 
   generateColorFuncOutput: function(color) {
     var funcOutput = "";
+
+    log(color);
 
     // func colorNameColor() -> UIColor {
     funcOutput += SwiftUtils.tab();

@@ -1,4 +1,4 @@
-@import "Source/Export/swiftUtils.js"
+@import "Source/Export/Swift/swiftUtils.js"
 
 // Responsible of generating swift output for given defined text styles
 var SwiftTextStyles = {

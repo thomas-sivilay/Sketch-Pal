@@ -14,6 +14,7 @@ var ColorInventory = {
       log(style.style().border());
       if (style.style().fill().fillType() == 0 && (!style.style().border().isEnabled())) {
         dictionary[style.style().fill().color().hexValue()] = new Color(style.name(), style.style().fill().color().hexValue(), style.style().fill().color())//style.style();
+        log(dictionary[style.style().fill().color().hexValue()])
       }
     }
 
