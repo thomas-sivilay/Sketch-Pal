@@ -1,5 +1,7 @@
 # Sketch-Pal
-Sketch Pal is a plugin to export all used and defined colors from your Sketch project to swift file. 
+Sketch Pal is a plugin to export all defined colors and text styles from your Sketch project to swift file. 
+
+![alt tag](https://github.com/thomas-sivilay/Sketch-Pal/blob/master/resources/logo.png)
 
 ## Install
 
