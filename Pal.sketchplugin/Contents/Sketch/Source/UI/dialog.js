@@ -30,11 +30,11 @@ var Dialog = {
       var url = Export.selectExportLocationURL();
 
       var colorPath = Export.pathForURL(url, "UIColorExtension.swift");
-      var definedColorsOutput = SwiftColors.generateSwiftColors(definedColors);
+      var definedColorsOutput = SwiftColors.generateSwiftColors(definedColors, true);
       Export.writeDataInPath(definedColorsOutput, colorPath);
 
       var textPath = Export.pathForURL(url, "NSDictionaryExtension.swift");
-      var definedTextStylesOutput = SwiftTextStyles.generateSwiftTextStyles(definedTextStyles, definedColors);
+      var definedTextStylesOutput = SwiftTextStyles.generateSwiftTextStyles(definedTextStyles, definedColors, true);
       Export.writeDataInPath(definedTextStylesOutput, textPath);
     } else {
       return;
@@ -61,7 +61,6 @@ var Dialog = {
       var undefinedColor = undefinedColors[key];
       var alert = Dialog.undefinedColorAlert(key, undefinedColor, i, count);
       var response = alert.runModal();
-      log(response);
       if (response == "1002") {
         return;
       } else if (response == "1000") {

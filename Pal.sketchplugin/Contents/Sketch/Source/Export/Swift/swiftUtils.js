@@ -9,6 +9,10 @@ var SwiftUtils = {
     return "extension " + extension + " {";
   },
 
+  struct: function(struct) {
+    return "struct " + struct + " {";
+  },
+
   methodSignature: function(name) {
     return "static func " + SwiftUtils.camelize(SwiftUtils.cleanSymbol(name)) + "() {";
   },

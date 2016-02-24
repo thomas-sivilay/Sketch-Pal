@@ -3,7 +3,7 @@
 // Responsible of generating swift output for given defined text styles
 var SwiftTextStyles = {
 
-  generateSwiftTextStyles: function(definedTextStyles, definedColors) {
+  generateSwiftTextStyles: function(definedTextStyles, definedColors, extension) {
     var output = "";
 
     // import UIKit
@@ -11,7 +11,11 @@ var SwiftTextStyles = {
     output += SwiftUtils.newLine();
     output += SwiftUtils.newLine();
     // extension NSDictionary {
-    output += SwiftUtils.extension("NSDictionary");
+    if (extension) {
+      output += SwiftUtils.extension("NSDictionary");
+    } else {
+      output += SwiftUtils.struct("TextStyle");
+    }
     output += SwiftUtils.newLine();
     output += SwiftUtils.newLine();
 

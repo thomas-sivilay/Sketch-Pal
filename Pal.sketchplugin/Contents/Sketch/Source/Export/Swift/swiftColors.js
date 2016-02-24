@@ -3,7 +3,7 @@
 // Responsible of generating swift output for given defined colors
 var SwiftColors = {
 
-  generateSwiftColors: function(definedColors) {
+  generateSwiftColors: function(definedColors, extension) {
     var output = "";
 
     // import UIKit
@@ -11,7 +11,11 @@ var SwiftColors = {
     output += SwiftUtils.newLine();
     output += SwiftUtils.newLine();
     // extension UIColor {
-    output += SwiftUtils.extension("UIColor");
+    if (extension) {
+      output += SwiftUtils.extension("UIColor");
+    } else {
+      output += SwiftUtils.struct("Color");
+    }
     output += SwiftUtils.newLine();
     output += SwiftUtils.newLine();
 

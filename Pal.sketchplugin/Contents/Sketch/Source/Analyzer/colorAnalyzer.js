@@ -42,22 +42,23 @@ var ColorAnalyzer = {
   },
 
   setSharedStyle: function(dictionary, layer, sharedStyles) {
-    //Is color -> fillType?
-    if (layer.style().fill() != null) {
-      var hexValue = layer.style().fill().color().hexValue();
-      if (dictionary[hexValue] == null) {
-        return layer;
-      }
-      // if (layer.style().sharedObjectID() == null) {
-      //   //set shared style
-      //   for (var i = 0; i < sharedStyles.objects().count(); i++) {
-      //     var sharedStyle = sharedStyles.objects().objectAtIndex(i);
-      //     if (sharedStyle.style().fill().color().hexValue() === hexValue) {
-      //       layer.setStyle(sharedStyle.newInstance());
-      //     }
-      //   }
-      // }
-    }
+     //Is color -> fillType?
+
+     var isSimpleFill = !layer.style().hasMoreThanOneEnabledFill()
+     var hasNoBorder = !layer.style().hasEnabledBorder()
+     var hasNoShadow = !layer.style().hasEnabledShadow()
+     var hasNoInnerShadow = !layer.style().innerShadow() || !layer.style().innerShadow().isEnabled()
+
+     //log("has no shadow: " + hasNoShadow + ", has no border: " + hasNoBorder + ", has no inner shadow:" + hasNoInnerShadow);
+
+     if (layer.style().fill() && hasNoBorder && hasNoShadow && isSimpleFill && hasNoInnerShadow) {
+       if (layer.style().fill().fillType() == 0 && layer.style().fill().isEnabled()) {
+         var hexValue = layer.style().fill().color().hexValue();
+         if (dictionary[hexValue] == null) {
+           return layer;
+         }
+       }
+     }
 
     return null;
   }

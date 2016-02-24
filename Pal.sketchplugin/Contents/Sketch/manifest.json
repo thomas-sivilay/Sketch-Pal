@@ -5,7 +5,7 @@
       "script" : "script.cocoascript",
       "handler" : "runExport",
       "shortcut" : "",
-      "name" : "Export Colors and TextStyles to Swift",
+      "name" : "Export Text Styles and Colors",
       "identifier" : "Export"
     },
     {
